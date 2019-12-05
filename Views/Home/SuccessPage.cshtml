@@ -1,0 +1,211 @@
+﻿@model Feedback.Models.Feedbacks
+
+@{
+    ViewBag.Title = "SuccessPage";
+}
+@*cdn for bootstrap celebration animation*@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+<link href="~/Content/Confetti.css" rel="stylesheet" />
+@*----------------------------------------------------------------------------*@
+
+@*links for circle complete animation*@
+
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+<link href="~/Content/CircleTick.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<script src="~/Scripts/CircleTick1.js"></script>
+
+@*-------------------------------------------------------------------------------*@
+
+@*html css for circle tick successful*@
+<div class="checkmark">
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" x="0px" y="0px"
+         viewBox="0, 0, 100, 100" id="checkmark">
+    <g transform="">
+    <circle class="path" fill="none" stroke="#7DB0D5" stroke-width="4" stroke-miterlimit="10" cx="50" cy="50" r="44" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <circle class="fill" fill="none" stroke="#7DB0D5" stroke-width="4" stroke-miterlimit="10" cx="50" cy="50" r="44" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <polyline class="check" fill="none" stroke="#7DB0D5" stroke-width="8" stroke-linecap="round" stroke-miterlimit="10"
+              points="70,35 45,65 30,52  " />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </g>
+    </svg>
+
+</div>
+
+
+
+
+
+@*-----------------------------------------------------------------------------------*@
+
+
+
+@*for successful completion celebration thing*@
+
+
+
+
+
+
+@*<div class="container2" style="display:none">
+        <p>Thanks @ViewBag.Organization For giving your Valueable Feedback</p>
+    </div>*@
+
+@*<div class="container" id="container1" style="display:none;">
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+
+    </div>*@
+<div class="main-cont">
+    <div class="container2" style="display:none">
+        <p>Thanks @ViewBag.Organization For giving your Valueable Feedback</p>
+    </div>
+
+    <div class="container" id="container1" style="display:none; margin-top:-300px;position:relative">
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+
+    </div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+    function Redirect() {
+        window.location.href = '@Url.Action("Index","Home")';
+    }
+
+    setTimeout('Redirect()', 15000);
+</script>
+
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+
+
+
+
+
+
+

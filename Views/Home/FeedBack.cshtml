@@ -1,0 +1,298 @@
+﻿@model Feedback.Models.Feedbacks
+
+@{
+    ViewBag.Title = "FeedBack";
+
+}
+
+<link href="~/Content/Scaling.css" rel="stylesheet" />
+
+<h2>FeedBack</h2>
+<div>
+    <div>Date of Visit: @ViewBag.Dovv </div>
+    <div>Organization Name: @ViewBag.Organizationn</div>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Products.Chapters.Cname, "Chapters", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Chapterss", ViewBag.Chapterss as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Products.Chapters.Cname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Products.Pname, "Products", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Productss", ViewBag.Productss as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Products.Pname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <script src="~/Scripts/jquery-3.3.1.js"></script>
+
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#Chapterss").change(function () {
+                    var Cid = document.getElementById("Chapterss").value;
+
+
+
+                    $.ajax({
+                        type: "post",
+                        url: "/Home/GetProducts?Cid=" + Cid,
+                        contentType: "html",
+                        success: function (response) {
+
+                            $("#Productss").empty();
+                            $("#Productss").append(response)
+                        }
+                    })
+                })
+
+
+
+
+            })
+
+        </script>
+        <hr />
+        <span style="font-size:20px;font-weight:500"> To what extent did our prototype and service offering fulfil your requirements?</span>
+        <div class="box">
+
+
+            <div class="rating">
+                <input type="radio" name="First" id="First10" value="10" /><label for="First10">10</label>
+                <input type="radio" name="First" id="First9" value="9" /><label for="First9">9</label>
+                <input type="radio" name="First" id="First8" value="8" /><label for="First8">8</label>
+                <input type="radio" name="First" id="First7" value="7" /><label for="First7">7</label>
+                <input type="radio" name="First" id="First6" value="6" /><label for="First6">6</label>
+                <input type="radio" name="First" id="First5" value="5" /><label for="First5">5</label>
+                <input type="radio" name="First" id="First4" value="4" /><label for="First4">4</label>
+                <input type="radio" name="First" id="First3" value="3" /><label for="First3">3</label>
+                <input type="radio" name="First" id="First2" value="2" /><label for="First2">2</label>
+                <input type="radio" name="First" id="First1" value="1" /><label for="First1">1</label>
+            </div>
+        </div>
+        <hr />
+        <span style="font-size:20px;font-weight:500">How do you rate our technical expertise in providing digital solutions? </span>
+        <div class="box" style="margin-top:50px;">
+
+            <div class="rating">
+                <input type="radio" name="Second" id="Second10" value="10" /><label for="Second10">10</label>
+                <input type="radio" name="Second" id="Second9" value="9" /><label for="Second9">9</label>
+                <input type="radio" name="Second" id="Second8" value="8" /><label for="Second8">8</label>
+                <input type="radio" name="Second" id="Second7" value="7" /><label for="Second7">7</label>
+                <input type="radio" name="Second" id="Second6" value="6" /><label for="Second6">6</label>
+                <input type="radio" name="Second" id="Second5" value="5" /><label for="Second5">5</label>
+                <input type="radio" name="Second" id="Second4" value="4" /><label for="Second4">4</label>
+                <input type="radio" name="Second" id="Second3" value="3" /><label for="Second3">3</label>
+                <input type="radio" name="Second" id="Second2" value="2" /><label for="Second2">2</label>
+                <input type="radio" name="Second" id="Second1" value="1" /><label for="Second1">1</label>
+            </div>
+        </div>
+        <hr />
+        <span style="font-size:20px;font-weight:500">How was the quality of presentation based on information and clarity?</span>
+        <div class="box" style="margin-top:50px;">
+
+            <div class="rating">
+                <input type="radio" name="Third" id="Third10" value="10" /><label for="Third10">10</label>
+                <input type="radio" name="Third" id="Third9" value="9" /><label for="Third9">9</label>
+                <input type="radio" name="Third" id="Third8" value="8" /><label for="Third8">8</label>
+                <input type="radio" name="Third" id="Third7" value="7" /><label for="Third7">7</label>
+                <input type="radio" name="Third" id="Third6" value="6" /><label for="Third6">6</label>
+                <input type="radio" name="Third" id="Third5" value="5" /><label for="Third5">5</label>
+                <input type="radio" name="Third" id="Third4" value="4" /><label for="Third4">4</label>
+                <input type="radio" name="Third" id="Third3" value="3" /><label for="Third3">3</label>
+                <input type="radio" name="Third" id="Third2" value="2" /><label for="Third2">2</label>
+                <input type="radio" name="Third" id="Third1" value="1" /><label for="Third1">1</label>
+            </div>
+        </div>
+        <hr />
+        <span style="font-size:20px;font-weight:500">Rate your overall experience with our staff and organisation? </span>
+        <div class="box" style="margin-top:50px;">
+
+            <div class="rating">
+                <input type="radio" name="Fourth" id="Fourth10" value="10" /><label for="Fourth10">10</label>
+                <input type="radio" name="Fourth" id="Fourth9" value="9" /><label for="Fourth9">9</label>
+                <input type="radio" name="Fourth" id="Fourth8" value="8" /><label for="Fourth8">8</label>
+                <input type="radio" name="Fourth" id="Fourth7" value="7" /><label for="Fourth7">7</label>
+                <input type="radio" name="Fourth" id="Fourth6" value="6" /><label for="Fourth6">6</label>
+                <input type="radio" name="Fourth" id="Fourth5" value="5" /><label for="Fourth5">5</label>
+                <input type="radio" name="Fourth" id="Fourth4" value="4" /><label for="Fourth4">4</label>
+                <input type="radio" name="Fourth" id="Fourth3" value="3" /><label for="Fourth3">3</label>
+                <input type="radio" name="Fourth" id="Fourth2" value="2" /><label for="Fourth2">2</label>
+                <input type="radio" name="Fourth" id="Fourth1" value="1" /><label for="Fourth1">1</label>
+
+            </div>
+        </div>
+        <hr />
+        <span style="font-size:20px;font-weight:500">How likely are you to consider our company first, to provide you with state of the art digital services? </span>
+        <div class="box" style="margin-top:50px;">
+
+            <div class="rating">
+                <input type="radio" name="Fifth" id="Fifth10" value="10" /><label for="Fifth10">10</label>
+                <input type="radio" name="Fifth" id="Fifth9" value="9" /><label for="Fifth9">9</label>
+                <input type="radio" name="Fifth" id="Fifth8" value="8" /><label for="Fifth8">8</label>
+                <input type="radio" name="Fifth" id="Fifth7" value="7" /><label for="Fifth7">7</label>
+                <input type="radio" name="Fifth" id="Fifth6" value="6" /><label for="Fifth6">6</label>
+                <input type="radio" name="Fifth" id="Fifth5" value="5" /><label for="Fifth5">5</label>
+                <input type="radio" name="Fifth" id="Fifth4" value="4" /><label for="Fifth4">4</label>
+                <input type="radio" name="Fifth" id="Fifth3" value="3" /><label for="Fifth3">3</label>
+                <input type="radio" name="Fifth" id="Fifth2" value="2" /><label for="Fifth2">2</label>
+                <input type="radio" name="Fifth" id="Fifth1" value="1" /><label for="Fifth1">1</label>
+
+            </div>
+        </div>
+        <hr />
+        <span style="font-size:20px;font-weight:500">How well did we meet your expectations to provide a digital solution? </span>
+        <div class="box" style="margin-top:50px;">
+
+            <div class="rating">
+                <input type="radio" name="Sixth" id="Sixth10" value="10" /><label for="Sixth10">10</label>
+                <input type="radio" name="Sixth" id="Sixth9" value="9" /><label for="Sixth9">9</label>
+                <input type="radio" name="Sixth" id="Sixth8" value="8" /><label for="Sixth8">8</label>
+                <input type="radio" name="Sixth" id="Sixth7" value="7" /><label for="Sixth7">7</label>
+                <input type="radio" name="Sixth" id="Sixth6" value="6" /><label for="Sixth6">6</label>
+                <input type="radio" name="Sixth" id="Sixth5" value="5" /><label for="Sixth5">5</label>
+                <input type="radio" name="Sixth" id="Sixth4" value="4" /><label for="Sixth4">4</label>
+                <input type="radio" name="Sixth" id="Sixth3" value="3" /><label for="Sixth3">3</label>
+                <input type="radio" name="Sixth" id="Sixth2" value="2" /><label for="Sixth2">2</label>
+                <input type="radio" name="Sixth" id="Sixth1" value="1" /><label for="Sixth1">1</label>
+
+            </div>
+        </div>
+        <hr />
+        <span style="font-size:20px;font-weight:500">How likely are you to recommend our services to others?</span>
+        <div class="box" style="margin-top:50px;">
+
+            <div class="rating">
+                <input type="radio" name="Seventh" id="Seventh10" value="10" /><label for="Seventh10">10</label>
+                <input type="radio" name="Seventh" id="Seventh9" value="9" /><label for="Seventh9">9</label>
+                <input type="radio" name="Seventh" id="Seventh8" value="8" /><label for="Seventh8">8</label>
+                <input type="radio" name="Seventh" id="Seventh7" value="7" /><label for="Seventh7">7</label>
+                <input type="radio" name="Seventh" id="Seventh6" value="6" /><label for="Seventh6">6</label>
+                <input type="radio" name="Seventh" id="Seventh5" value="5" /><label for="Seventh5">5</label>
+                <input type="radio" name="Seventh" id="Seventh4" value="4" /><label for="Seventh4">4</label>
+                <input type="radio" name="Seventh" id="Seventh3" value="3" /><label for="Seventh3">3</label>
+                <input type="radio" name="Seventh" id="Seventh2" value="2" /><label for="Seventh2">2</label>
+                <input type="radio" name="Seventh" id="Seventh1" value="1" /><label for="Seventh1">1</label>
+
+            </div>
+        </div>
+        <hr />
+
+
+
+        <div class="form-group" style="margin-top:56px;margin-left:-4px;">
+            <label for="exampleFormControlTextarea1" style="font-size:20px;font-weight:500">Features to be Added</label>
+            <textarea class="form-control rounded-0" id="word_count" rows="6" style="min-width:60%" value="Addition" name="Addition"></textarea>
+            <small class="text-muted" id="display_count" style="color:red"></small>
+            <small class="text-muted" id="word_left" style="color:red;margin-left:88px;"></small>
+        </div>
+        <hr />
+        <div class="form-group" style="margin-top:56px;margin-left:-4px;">
+            <label for="exampleFormControlTextarea2" style="font-size:20px;font-weight:500">Features to be Removed/Modified</label>
+            <textarea class="form-control rounded-0" id="word_count2" rows="6" style="min-width:60%" value="Deletion" name="Deletion"></textarea>
+            <small class="text-muted" id="display_count2" style="color:red"></small>
+            <small class="text-muted" id="word_left2" style="color:red;margin-left:88px;"></small>
+        </div>
+        <hr />
+        <div class="form-group" style="margin-top:56px;margin-left:-4px;">
+            <label for="exampleFormControlTextarea3" style="font-size:20px;font-weight:500">Additional Comments(if any)</label>
+            <textarea class="form-control rounded-0" id="word_count3" rows="6" style="min-width:60%" value="Comments" name="Comments"></textarea>
+            <small class="text-muted" id="display_count3" style="color:red"></small>
+            <small class="text-muted" id="word_left3" style="color:red;margin-left:88px;"></small>
+        </div>
+        <hr />
+
+
+        <input type="submit" class="btn btn-primary" style="margin-top:-10px;margin-left:-10px;" value="Submit Feedback" />
+
+
+        <script>
+            $(document).ready(function () {
+
+                $("#word_count").keyup(validation);
+
+                function validation() {
+                    var words = $("#word_count").val()
+                    var l = words.split(' ').length;
+
+
+                    if (l > 1) {
+                        console.log(l)
+                        $('#display_count').text("Words Counter" + " " + (l - 1));
+                        $('#word_left').text(200 - (l - 1) + " " + "Words Left");
+                    } else {
+                        $('#display_count').text("Words Counter 0");
+                        $('#word_left').text("250 Words Left");
+                    }
+
+
+                }
+
+                $("#word_count2").keyup(validation1);
+
+                function validation1() {
+                    var word = $("#word_count2").val()
+                    var l = word.split(' ').length;
+
+
+                    if (l > 1) {
+                        $('#display_count2').text("Words Counter" + " " + (l - 1));
+                        $('#word_left2').text(200 - (l - 1) + " " + "Words Left");
+                    } else {
+                        $('#display_count2').text("Words Counter 0");
+                        $('#word_left2').text("250 Words Left");
+                    }
+
+
+                }
+                $("#word_count3").keyup(validation2);
+
+                function validation2() {
+                    var word = $("#word_count3").val()
+                    var l = word.split(' ').length;
+                    console.log(l)
+
+                    if (l > 1) {
+                        $('#display_count3').text("Words Counter" + " " + (l - 1));
+                        $('#word_left3').text(200 - (l - 1) + " " + "Words Left");
+                    } else {
+                        $('#display_count3').text("Words Counter 0");
+                        $('#word_left3').text("250 Words Left");
+                    }
+
+
+                }
+
+
+
+            });
+
+        </script>
+
+
+
+
+
+
+    </div>
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,11 @@
+﻿
+@model Feedback.Models.Products
+
+<option>Select Products</option>
+@if (ViewBag.Products != null)
+{
+    foreach (var item in ViewBag.Products)
+    {
+        <option value="@item">@item.Text</option>
+    }
+}
