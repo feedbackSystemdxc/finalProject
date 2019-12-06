@@ -5,27 +5,61 @@
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+
 <h2>Feedback Forum for : @Session["username"]</h2>
 <hr />
-@* add graphs here *@
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <canvas class="myChart"></canvas>
+        </div>
+
+        @{
+            var products = ViewBag.products;
+            var pfeedbacks = ViewBag.pfeedbacks;
+        }
+    <div id="products" style="display:none;">
+        @{
+            foreach (var item in products)
+            {
+                <p>@item</p>
+                
+            }
+        }
+    </div>
+    <div id="feedback" style="display:none;">
+        @{ foreach (var item in pfeedbacks)
+                {
+                <p>@item </p>}}
+    </div>
+        
+
+    </div>
+    
+</div>
 <hr />
 @using (Html.BeginForm())
 {
-<div style="float:right;">
-    <input type="text" name="searchVal" placeholder="Search here" />
-    @*<a href="#" onclick="location.href='@Url.Action("UserPage",new { cid=Session["cid"]})'"><i class="glyphicon glyphicon-search"></i></a>*@
-    <button type="submit"><i class="glyphicon glyphicon-search"></i> </button>
-    &ensp;
-    @Html.DropDownList("Sortby", new SelectListItem[]
-{ new SelectListItem() { Text = "Newest to Oldest", Value = "0" },
-    new SelectListItem() { Text = "Oldest to Newest", Value = "1" },
-    new SelectListItem() { Text = "Rating High to Low", Value = "2" },
-    new SelectListItem() { Text = "Rating Low to High", Value = "3" }
-})
-    <button type="submit"><i class="glyphicon glyphicon-sort"></i> </button>
+    <div style="float:right;">
+        <input type="text" name="searchVal" placeholder="Search here" />
+        @*<a href="#" onclick="location.href='@Url.Action("UserPage",new { cid=Session["cid"]})'"><i class="glyphicon glyphicon-search"></i></a>*@
+        <button type="submit"><i class="glyphicon glyphicon-search"></i> </button>
+        &ensp;
+        @Html.DropDownList("Sortby", new SelectListItem[]
+    { new SelectListItem() { Text = "Newest to Oldest", Value = "0" },
+        new SelectListItem() { Text = "Oldest to Newest", Value = "1" },
+        new SelectListItem() { Text = "Rating High to Low", Value = "2" },
+        new SelectListItem() { Text = "Rating Low to High", Value = "3" }
+    })
+        <button type="submit"><i class="glyphicon glyphicon-sort"></i> </button>
 
 
-</div>
+    </div>
 
 }
 <br />
@@ -36,7 +70,7 @@
 
     //float avg = (float)(item.First + item.Second + item.Third + item.Fourth + item.Fifth + item.Sixth + item.Seventh) / 7;
     DateTime dov = (DateTime)(item.Customers.Dov);
-    
+
     <div class="rightdiv">
         <div class="div-bookmarklet" style="font-size:large;">
             <div style="float:left">@item.Customers.Organization    (@dov.ToShortDateString())</div>
@@ -56,4 +90,122 @@
 
     </div>
 }
+
+
+
+<script type="text/javascript">
+
+    
+     //Getting the Products Name
+    let d = document.getElementById("products").textContent;
+    console.log(d);
+    let c = d.split("  ");
+    let productsData = [];
+    c.map(d => {
+        if (d.length>3) {
+            productsData.push(d)
+        }
+    })
+    console.log(productsData);
+
+     //Getting the Feedbac
+    //Getting the Products Id
+    let ids = document.getElementById("feedback").textContent;
+    console.log(ids);
+    let pid = ids.split(" ");
+    let feedbacks = [];
+    pid.map(d => {
+        if (d.length>0) {
+            feedbacks.push(d)
+        }
+    })
+   // console.log(feedbacks.slice(1, 6));
+    let feedbackdata = feedbacks.map(v => +v);
+    
+
+  let  data = feedbackdata.slice(1, 7);
+    console.log(feedbackdata.slice(1, 6));
+
+
+
+
+    let myChart = document.querySelector(".myChart").getContext("2d");
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = "Lato";
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = "#777";
+
+    let massPopChart = new Chart(myChart, {
+        type: "bar", // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+        data: {
+            labels:productsData,
+                //[
+                //    "boston",
+                //    "worcester",
+                //    "springfield",
+                //    "lowell",
+                //    "cambridge",
+                //    "new bedford"
+                //],
+            datasets: [
+                {
+                    label: "Feedbacks",
+                    data: data,
+                      //  [617594, 181045, 153060, 106519, 105162, 95072],
+                    //backgroundColor:'green',
+                    backgroundColor: [
+                        "rgba(255, 99, 132, 0.6)",
+                        "rgba(54, 162, 235, 0.6)",
+                        "rgba(255, 206, 86, 0.6)",
+                        "rgba(75, 192, 192, 0.6)",
+                        "rgba(153, 102, 255, 0.6)",
+                        "rgba(255, 159, 64, 0.6)",
+                        "rgba(255, 99, 132, 0.6)"
+                    ],
+                    borderWidth: 1,
+                    borderColor: "#777",
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: "#000"
+                }
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Total Feedbacks per Products",
+                fontSize: 25
+            },
+            legend: {
+                display: true,
+                position: "right",
+                labels: {
+                    fontColor: "#000"
+                }
+            },
+            layout: {
+                padding: {
+                    left: 50,
+                    right: 0,
+                    bottom: 0,
+                    top: 0
+                }
+            },
+            tooltips: {
+                enabled: true
+            },
+            scales: {
+            xAxes: [{
+                ticks: {
+                    autoSkip: false,
+                    maxRotation: 0,
+                    minRotation: 0,
+                    fontSize:15
+                }
+            }]
+        }
+        }
+    });
+
+</script>
+
 

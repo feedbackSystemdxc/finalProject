@@ -143,6 +143,43 @@
         animation-delay: -2.5s;
     }
 
+    .confetti:nth-child(19) {
+        background-color: #f2d74e;
+        left: 100%;
+        -webkit-animation-delay: -2.5s;
+        animation-delay: -2.5s;
+    }
+    .confetti:nth-child(20) {
+        background-color: #f2d74e;
+        left: 100%;
+        -webkit-animation-delay: -2.5s;
+        animation-delay: -2.5s;
+    }
+    .confetti:nth-child(21) {
+        background-color: #f2d74e;
+        left: 100%;
+        -webkit-animation-delay: -2.5s;
+        animation-delay: -2.5s;
+    }
+    .confetti:nth-child(22) {
+        background-color: #f2d74e;
+        left: 100%;
+        -webkit-animation-delay: -2.5s;
+        animation-delay: -2.5s;
+    }
+    .confetti:nth-child(23) {
+        background-color: #f2d74e;
+        left: 100%;
+        -webkit-animation-delay: -2.5s;
+        animation-delay: -2.5s;
+    }
+    .confetti:nth-child(24) {
+        background-color: #f2d74e;
+        left: 100%;
+        -webkit-animation-delay: -2.5s;
+        animation-delay: -2.5s;
+    }
+
 @-webkit-keyframes confetti {
     0% {
         -webkit-transform: rotateZ(15deg) rotateY(0deg) translate(0, 0);

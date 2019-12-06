@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using Feedback.Models;
+
 //Original
 
 namespace Feedback.Controllers
@@ -142,11 +143,63 @@ namespace Feedback.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Index");
         }
+
         [Authorize]
         public ActionResult UserPage(int cid,string searchVal,string Sortby)
         {
+
             List<Feedbacks> fb = entities.Feedbacks.ToList();
+
             IEnumerable<Feedbacks> fb1 = fb.Where(x => x.Products.Cid == cid);
+            var ab= fb.Where(x => x.Products.Cid == cid).Select(p => p.Pid).ToList();
+
+            // Dictionary<int, int> ProductList = new Dictionary<int, int>();
+            //   List<int> ProductList = new List<int>();
+          
+            var dis= fb.Where(x => x.Products.Cid == cid).Select(p => p.Pid).Distinct().ToList();
+
+            List<string> pname = fb.Where(x => x.Products.Cid == cid).Select(p => p.Products.Pname).Distinct().ToList();
+
+            ViewBag.products = pname;
+            
+
+            int[] countt = new int[dis.Count];
+
+            ViewBag.pfeedbacks = countt;
+
+            int counter = 0;
+            
+            foreach(var d in dis)
+            {
+                foreach(var o in ab)
+                {
+                    if(d==o)
+                    {
+                        countt[counter] += 1;
+                        
+                    }
+                    
+                }
+                counter++;
+            }
+
+
+
+
+
+
+            //foreach(var id in ab)
+            // {
+            // foreach (var Product in ProductList)
+            // {
+            //    if(Product == id)
+            //     {
+            //         ProductList[] = Product + 1;
+            //     }
+            // }
+            // }
+
+            int c = fb1.Count();
             if (!String.IsNullOrEmpty(searchVal))
             {
                 fb1 = fb1.Where(x => x.Customers.Organization.ToLower().Contains(searchVal.ToLower()) | x.Products.Pname.ToLower().Contains(searchVal.ToLower()));
